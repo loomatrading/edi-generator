@@ -1,18 +1,20 @@
-name: Build Executable (.exe)
+name: Build Executable
 
 on:
-  workflow_dispatch: # يتيح تشغيل البناء يدوياً بنقرة زر من موقع GitHub
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
+    - name: Checkout Repository
+      uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/python-version@v4
+      uses: actions/setup-python@v4
       with:
         python-version: '3.10'
 
@@ -22,12 +24,12 @@ jobs:
         pip install -r requirements.txt
         pip install pyinstaller
 
-    - name: Build EXE
+    - name: Build Executable
       run: |
         pyinstaller --noconsole --onefile --name="CUSCAR_EDI_Generator" main.py
 
-    - name: Upload EXE Artifact
-      uses: actions/upload-artifact@v3
+    - name: Upload Executable
+      uses: actions/upload-artifact@v4
       with:
-        name: CUSCAR_EDI_Generator_EXE
+        name: CUSCAR_EDI_Generator
         path: dist/CUSCAR_EDI_Generator.exe
