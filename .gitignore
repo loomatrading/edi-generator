@@ -1,0 +1,17 @@
+# Python temporary files
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+
+# Excel temporary files
+~$*.xlsx
+~$*.xls
+
+# Outputs & IDEs
+*.txt
+*.edi
+.vscode/
+.idea/
